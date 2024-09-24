@@ -20,5 +20,15 @@ namespace AlgorithmLab1
         {
             InitializeComponent();
         }
+
+        private void RunButton_Click(object sender, RoutedEventArgs e)
+        {
+            // NOTE: это метод для обработки кнопки и запуска алгоритма.
+        }
+
+        private void AlgSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // NOTE: это метод для обработки cмены алгоритма (пригодится для графиков и описания).
+        }
     }
 }
