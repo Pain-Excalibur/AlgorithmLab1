@@ -54,6 +54,23 @@ namespace AlgorithmLab1
         private void RunButton_Click(object sender, RoutedEventArgs e)
         {
             // NOTE: это метод для обработки кнопки и запуска алгоритма.
+            // Возможно тут можно сделать более продвинутую проверку, которая бы говорила что мы вводим не так, но мне лень. Может быть потом сделаю.
+            if (AlgSelector.SelectedItem != null)
+            {
+                if (Int32.TryParse(InputBoxN.Text, out int n) && Int32.TryParse(InputBoxM.Text, out int m) && n > 0 && m > 0 && n < 2000)
+                {
+                    // Заглушка, потом уберу.
+                    MessageBox.Show("Всё выбрано правильно. Возьми печеньку 🍪", "ЗАГЛУШКА", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Введены некорректные параметры, повторите ввод.", "ОШИБКА: НЕКОРРЕТНЫЕ ПАРАМЕТРЫ", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Перед началом необходимо выбрать алгоритм.", "ОШИБКА: НЕ ВЫБРАН АЛГОРИТМ", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void AlgSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
