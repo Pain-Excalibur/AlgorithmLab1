@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +22,33 @@ namespace AlgorithmLab1
         public MainWindow()
         {
             InitializeComponent();
+            InitializeGraph();
+        }
+
+        private void InitializeGraph()
+        {
+            // NOTE: возможно вынесу все методы графиков в отдельный класс.
+            PlotModel plotModel = new();
+
+            LinearAxis dimensionAxis = new()
+            {
+                Position = AxisPosition.Bottom,
+                AbsoluteMaximum = 2000,
+                AbsoluteMinimum = 0,
+                Title = "Размерность"
+            };
+
+            LinearAxis timeAxis = new()
+            {
+                Position = AxisPosition.Left,
+                AbsoluteMinimum = 0,
+                Title = "Секунды"
+            };
+
+            plotModel.Axes.Add(dimensionAxis);
+            plotModel.Axes.Add(timeAxis);
+
+            AlgGraph.Model = plotModel;
         }
 
         private void RunButton_Click(object sender, RoutedEventArgs e)
