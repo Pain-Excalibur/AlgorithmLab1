@@ -1,4 +1,5 @@
-﻿using OxyPlot;
+﻿using AlgoritmLab1.algorithms;
+using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using System.Text;
@@ -19,6 +20,8 @@ namespace AlgorithmLab1
     /// </summary>
     public partial class MainWindow : Window
     {
+        private PlotModel plotModel;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -28,7 +31,7 @@ namespace AlgorithmLab1
         private void InitializeGraph()
         {
             // NOTE: возможно вынесу все методы графиков в отдельный класс.
-            PlotModel plotModel = new();
+            plotModel = new PlotModel();
 
             LinearAxis dimensionAxis = new()
             {
@@ -51,16 +54,38 @@ namespace AlgorithmLab1
             AlgGraph.Model = plotModel;
         }
 
+        private void DrawGraph(double[] data)
+        {
+            plotModel.Series.Clear();
+
+            LineSeries lineSeries = new();
+
+            // Заполнение серии данными
+            for (int i = 0; i < data.Length; i++)
+            {
+                lineSeries.Points.Add(new DataPoint(i + 1, data[i]));
+            }
+
+            // Добавление серии в модель графика
+            plotModel.Series.Add(lineSeries);
+
+            // Обновление модели графика
+            AlgGraph.InvalidatePlot(true);
+        }
+
+
         private void RunButton_Click(object sender, RoutedEventArgs e)
         {
             // NOTE: это метод для обработки кнопки и запуска алгоритма.
             // Возможно тут можно сделать более продвинутую проверку, которая бы говорила что мы вводим не так, но мне лень. Может быть потом сделаю.
             if (AlgSelector.SelectedItem != null)
             {
-                if (Int32.TryParse(InputBoxN.Text, out int n) && Int32.TryParse(InputBoxM.Text, out int m) && n > 0 && m > 0 && n < 2000)
+                if (uint.TryParse(InputBoxN.Text, out uint n) && uint.TryParse(InputBoxM.Text, out uint m) && n <= 2000)
                 {
-                    // Заглушка, потом уберу.
-                    MessageBox.Show("Всё выбрано правильно. Возьми печеньку 🍪", "ЗАГЛУШКА", MessageBoxButton.OK, MessageBoxImage.Information);
+                    // Всё ещё заглушка.
+                    QuickSort quickSort = new();
+                    double[] result = quickSort.StartTesting(n, m);
+                    DrawGraph(result);
                 }
                 else
                 {

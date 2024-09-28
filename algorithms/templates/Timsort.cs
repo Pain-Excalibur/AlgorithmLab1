@@ -22,7 +22,7 @@ namespace AlgoritmLab1.algorithms
         {
             int n = array.Length;
 
-RUN            for (int start = 0; start < n; start += RUN)
+            for (int start = 0; start < n; start += RUN)
             {
                 int end = Math.Min(start + RUN - 1, n - 1);
                 Array.Sort(array, start, end - start + 1);
