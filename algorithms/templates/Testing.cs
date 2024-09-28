@@ -19,16 +19,16 @@ namespace AlgoritmLab1.algorithms.templates
 
             double[,] allTests = new double[m, n];
             Stopwatch stopwatch = new Stopwatch();
-            for (uint precision = m; precision != 0; precision--)
-                for (int dataSize = 1; dataSize <= n; dataSize++)
+            for (uint precision = 0; precision < m; precision++)
+                for (uint dataSize = 1; dataSize <= n; dataSize++)
                 {
                     //do test/alg/writedata here
 
                     //получить данные
-                    object data = GetData(n);
+                    object data = GetData(dataSize);
                     
                     //сделать алгоритм
-                    stopwatch.Start();//засекаю
+                    stopwatch.Restart();//засекаю
 
                     DoAlg(data);
 
