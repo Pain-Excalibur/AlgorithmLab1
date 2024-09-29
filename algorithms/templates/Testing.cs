@@ -20,12 +20,12 @@ namespace AlgoritmLab1.algorithms.templates
             double[,] allTests = new double[m, n];
             Stopwatch stopwatch = new Stopwatch();
             for (uint precision = 0; precision < m; precision++)
-                for (uint dataSize = 1; dataSize <= n; dataSize++)
+                for (uint dataSize = 0; dataSize < n; dataSize++)
                 {
                     //do test/alg/writedata here
 
                     //получить данные
-                    object data = GetData(dataSize);
+                    object data = GetData(dataSize + 1);
                     
                     //сделать алгоритм
                     stopwatch.Restart();//засекаю
