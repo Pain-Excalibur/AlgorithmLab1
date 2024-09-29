@@ -32,12 +32,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <ComboBox x:Name="AlgSelector" Grid.Row="0" Margin="0,0,0,10" VerticalContentAlignment="Center" SelectionChanged="AlgSelector_SelectionChanged">
-                    <!--TODO: заполнить названиями алгоритмов / придумать как бы это сделать автоматически-->
-                    <ComboBoxItem Content="Алгоритм 1"/>
-                    <ComboBoxItem Content="Алгоритм 2"/>
-                    <ComboBoxItem Content="Алгоритм 3"/>
-                </ComboBox>
+                <ComboBox x:Name="AlgSelector" Grid.Row="0" Margin="0,0,0,10" VerticalContentAlignment="Center" SelectionChanged="AlgSelector_SelectionChanged"/>
 
                 <TextBox Grid.Row="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True" AcceptsReturn="True">
                     <!--NOTE: возможно здесь стоит размещать описание для конкретного алогритма.-->

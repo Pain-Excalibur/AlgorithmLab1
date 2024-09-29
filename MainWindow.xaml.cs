@@ -1,4 +1,5 @@
 ﻿using AlgoritmLab1.algorithms;
+using AlgoritmLab1.algorithms.templates;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
@@ -21,11 +22,31 @@ namespace AlgorithmLab1
     public partial class MainWindow : Window
     {
         private PlotModel plotModel;
+        private readonly Dictionary<string, Algorithm> algorithms = new()
+        {
+            { "Постоянная функция", new ConstantFunction() },
+            { "Сумма элементов", new SumFunction() },
+            { "Произведение элементов", new ProductFunction() },
+            // TODO: разделить наивное вычисление и метод Горнера.
+            { "Bubble sort", new BubbleSort() },
+            { "Quick sort", new QuickSort() },
+            { "Timsort", new Timsort() },
+            // TODO: добавить ещё алгоритмы.
+        };
 
         public MainWindow()
         {
             InitializeComponent();
+            InitializeComboBox();
             InitializeGraph();
+        }
+
+        private void InitializeComboBox() 
+        {
+            foreach (string algorithm in algorithms.Keys) 
+            { 
+                AlgSelector.Items.Add(algorithm);
+            }
         }
 
         private void InitializeGraph()
@@ -82,9 +103,10 @@ namespace AlgorithmLab1
             {
                 if (uint.TryParse(InputBoxN.Text, out uint n) && uint.TryParse(InputBoxM.Text, out uint m) && n <= 2000)
                 {
-                    // Всё ещё заглушка.
-                    QuickSort quickSort = new();
-                    double[] result = quickSort.StartTesting(n, m);
+                    string selectedAlgorithmName = AlgSelector.SelectedItem.ToString();
+                    Algorithm selectedAlgorithm = algorithms[selectedAlgorithmName];
+
+                    double[] result = selectedAlgorithm.StartTesting(n, m);
                     DrawGraph(result);
                 }
                 else
