@@ -1,5 +1,6 @@
 ﻿using AlgoritmLab1.algorithms;
 using AlgoritmLab1.algorithms.templates;
+using MathNet.Numerics;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
@@ -19,7 +20,7 @@ namespace AlgorithmLab1
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : System.Windows.Window
     {
         private PlotModel plotModel;
         private readonly Dictionary<string, Algorithm> algorithms = new()
@@ -57,7 +58,7 @@ namespace AlgorithmLab1
             LinearAxis dimensionAxis = new()
             {
                 Position = AxisPosition.Bottom,
-                AbsoluteMaximum = 2000,
+                AbsoluteMaximum = 50000,
                 AbsoluteMinimum = 0,
                 Title = "Размерность"
             };
@@ -81,16 +82,40 @@ namespace AlgorithmLab1
 
             LineSeries lineSeries = new();
 
-            // Заполнение серии данными
             for (int i = 0; i < data.Length; i++)
             {
                 lineSeries.Points.Add(new DataPoint(i + 1, data[i]));
             }
 
-            // Добавление серии в модель графика
             plotModel.Series.Add(lineSeries);
+            AlgGraph.InvalidatePlot(true);
+        }
 
-            // Обновление модели графика
+        private void DrawApproximation(double[] data)
+        {
+            int length = data.Length;
+            double[] elements = new double[length];
+
+            for (int i = 0; i < length; i++)
+            {
+                elements[i] = i + 1;
+            }
+
+            // TODO: наверное нужна более подробная аппроксимация, потому не везде подходит вторая степень.
+            var coefficients = Fit.Polynomial(elements, data, 2);
+
+            LineSeries lineSeries = new()
+            {
+                Color = OxyColors.Red
+            };
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                double value = coefficients[0] + coefficients[1] * (i + 1) + coefficients[2] * Math.Pow(i + 1, 2);
+                lineSeries.Points.Add(new DataPoint(i + 1, value));
+            }
+
+            plotModel.Series.Add(lineSeries);
             AlgGraph.InvalidatePlot(true);
         }
 
@@ -101,13 +126,14 @@ namespace AlgorithmLab1
             // Возможно тут можно сделать более продвинутую проверку, которая бы говорила что мы вводим не так, но мне лень. Может быть потом сделаю.
             if (AlgSelector.SelectedItem != null)
             {
-                if (uint.TryParse(InputBoxN.Text, out uint n) && uint.TryParse(InputBoxM.Text, out uint m) && n <= 2000)
+                if (uint.TryParse(InputBoxN.Text, out uint n) && uint.TryParse(InputBoxM.Text, out uint m) && n <= 50000)
                 {
                     string selectedAlgorithmName = AlgSelector.SelectedItem.ToString();
                     Algorithm selectedAlgorithm = algorithms[selectedAlgorithmName];
 
                     double[] result = selectedAlgorithm.StartTesting(n, m);
                     DrawGraph(result);
+                    DrawApproximation(result);
                 }
                 else
                 {
