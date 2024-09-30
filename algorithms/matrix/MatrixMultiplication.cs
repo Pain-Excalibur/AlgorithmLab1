@@ -14,18 +14,19 @@ namespace AlgoritmLab1.algorithms.matrix
         protected override void DoAlg(object data)
         {
             uint[,] matrix = (uint[,])data;
-            //implementation for resust matrix is missed
-            uint someRes = 0;
-            int n = matrix.Length;
+            int n = matrix.GetLength(0);
+            uint[,] resultMatrix = new uint[n, n];
+            uint sum = 0;
+
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
                     for (int k = 0; k < n; k++)
                     {
-                        someRes += matrix[i, k] * matrix[k, j];
+                        sum += matrix[i, k] * matrix[k, j];
                     }
-                    someRes = 0;
+                    resultMatrix[i, j] = sum;
                 }
             }
         }

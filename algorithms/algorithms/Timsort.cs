@@ -5,17 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlgoritmLab1.algorithms
+namespace AlgoritmLab1.algorithms.algorithms
 {
     internal class Timsort : Algorithm
     {
-        private const int RUN = 32; 
+        private const int RUN = 32;
 
         protected override void DoAlg(object data)
         {
             uint[] array = (uint[])data;
             TimsortSort(array);
-            Console.WriteLine("Отсортированный массив: " + string.Join(", ", array));
         }
 
         private void TimsortSort(uint[] array)
@@ -33,7 +32,7 @@ namespace AlgoritmLab1.algorithms
                 for (int left = 0; left < n; left += 2 * size)
                 {
                     int mid = left + size - 1;
-                    int right = Math.Min((left + 2 * size - 1), (n - 1));
+                    int right = Math.Min(left + 2 * size - 1, n - 1);
 
                     if (mid < right)
                     {

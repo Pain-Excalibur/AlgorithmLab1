@@ -16,6 +16,11 @@ namespace AlgoritmLab1.algorithms.algorithms
 
             int index = 0;
 
+            if (n == 1)
+            {
+                return;
+            }
+
             while (index < n)
             {
                 if (index == 0)

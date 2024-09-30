@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlgoritmLab1.algorithms
+namespace AlgoritmLab1.algorithms.algorithms
 {
     internal class QuickSort : Algorithm
     {
@@ -13,7 +13,6 @@ namespace AlgoritmLab1.algorithms
         {
             int[] array = (int[])data;
             Sort(array, 0, array.Length - 1);
-            Console.WriteLine("Отсортированный массив: " + string.Join(", ", array));
         }
 
         public void Sort(int[] array, int low, int high)
@@ -29,8 +28,8 @@ namespace AlgoritmLab1.algorithms
 
         private int Partition(int[] array, int low, int high)
         {
-            int pivot = array[high]; 
-            int i = (low - 1); 
+            int pivot = array[high];
+            int i = low - 1;
 
             for (int j = low; j < high; j++)
             {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AlgoritmLab1.algorithms.templates;
 
-namespace AlgoritmLab1.algorithms
+namespace AlgoritmLab1.algorithms.algorithms
 {
     internal class ConstantFunction : Algorithm
     {
@@ -13,12 +13,11 @@ namespace AlgoritmLab1.algorithms
         {
             uint[] vector = (uint[])data;
             int result = CalculateFunction(vector);
-            Console.WriteLine($"Результат: {result}");
         }
 
         public int CalculateFunction(uint[] vector)
         {
-            return 1; 
+            return 1;
         }
     }
 }

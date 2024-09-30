@@ -73,9 +73,7 @@ namespace AlgoritmLab1.algorithms.algorithms
         {
             uint[] arr = (uint[])data;
             int n = arr.Length;
-            MessageBox.Show(arr.ToString());
             Sort(arr, 0, n-1);
-            MessageBox.Show(arr.ToString());
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using AlgoritmLab1.algorithms;
+﻿using AlgoritmLab1.algorithms.algorithms;
+using AlgoritmLab1.algorithms.matrix;
+using AlgoritmLab1.algorithms.powAlgs;
 using AlgoritmLab1.algorithms.templates;
 using MathNet.Numerics;
 using OxyPlot;
@@ -23,16 +25,25 @@ namespace AlgorithmLab1
     public partial class MainWindow : System.Windows.Window
     {
         private PlotModel plotModel;
-        private readonly Dictionary<string, Algorithm> algorithms = new()
+        private readonly Dictionary<string, Testing> algorithms = new()
         {
             { "Постоянная функция", new ConstantFunction() },
             { "Сумма элементов", new SumFunction() },
             { "Произведение элементов", new ProductFunction() },
-            // TODO: разделить наивное вычисление и метод Горнера.
+            { "Вычисление полинома", new NaivePolinomial() },
+            { "Вычисление полинома\n(Метод Горнера)", new HornerPolynomial() },
             { "Bubble sort", new BubbleSort() },
             { "Quick sort", new QuickSort() },
             { "Timsort", new Timsort() },
-            // TODO: добавить ещё алгоритмы.
+            { "Произведение матриц", new MatrixMultiplication() },
+            { "Возведение в степень", new NaivePow() },
+            { "Возведение в степень\n(рекурсия)", new RecPow() },
+            { "Возведение в степень\n(QuickPow)", new QuickPow() },
+            { "Возведение в степень\n(Classic QuickPow)", new ClassicQuickPow() },
+            { "Cycle sort", new CycleSort() },
+            { "Gnome sort", new GnomeSort() },
+            { "Merge sort", new MergeSort() },
+            { "Counting sort", new CountingSort() },
         };
 
         public MainWindow()
@@ -129,9 +140,9 @@ namespace AlgorithmLab1
                 if (uint.TryParse(InputBoxN.Text, out uint n) && uint.TryParse(InputBoxM.Text, out uint m) && n <= 50000)
                 {
                     string selectedAlgorithmName = AlgSelector.SelectedItem.ToString();
-                    Algorithm selectedAlgorithm = algorithms[selectedAlgorithmName];
-
+                    Testing selectedAlgorithm = algorithms[selectedAlgorithmName];
                     double[] result = selectedAlgorithm.StartTesting(n, m);
+
                     DrawGraph(result);
                     DrawApproximation(result);
                 }

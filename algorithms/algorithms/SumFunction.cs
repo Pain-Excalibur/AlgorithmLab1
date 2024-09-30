@@ -5,25 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlgoritmLab1.algorithms
+namespace AlgoritmLab1.algorithms.algorithms
 {
-    internal class ProductFunction : Algorithm
+    internal class SumFunction : Algorithm
     {
         protected override void DoAlg(object data)
         {
             uint[] vector = (uint[])data;
-            int result = CalculateProduct(vector);
-            Console.WriteLine($"Произведение элементов: {result}");
+            int result = CalculateSum(vector);
         }
 
-        public int CalculateProduct(uint[] vector)
+        public int CalculateSum(uint[] vector)
         {
-            int product = 1;
+            int sum = 0;
             foreach (var value in vector)
             {
-                product *= (int)value; 
+                sum += (int)value;
             }
-            return product;
+            return sum;
         }
     }
 }
