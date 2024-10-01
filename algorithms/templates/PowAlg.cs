@@ -12,9 +12,27 @@ namespace AlgoritmLab1.algorithms.templates
 
         protected int steps = 0;
 
-        public int GetStepsCount()
+        public override double[] GetResults(uint n, uint m)
         {
-            return this.steps;
+            double[] stepsResult = new double[n];
+
+            for (uint dataSize = 0; dataSize < n; dataSize++)
+            {
+                this.steps = 0;
+
+                for (uint i = 0; i < m; i++)
+                {
+                    this.steps = 0;
+
+                    DoAlg(GetData(dataSize + 1));
+
+                    stepsResult[dataSize] += this.steps;
+                }
+
+                stepsResult[dataSize] /= m;
+            }
+
+            return stepsResult;
         }
 
         protected override object GetData(uint n)

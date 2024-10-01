@@ -13,6 +13,12 @@ namespace AlgoritmLab1.algorithms.templates
 
         protected abstract object GetData(uint n);
 
+        // Будем вызывать его. Он будет переопределён в PowAlg, чтобы подсчитывались шаги.
+        public virtual double[] GetResults(uint n, uint m)
+        {
+            return StartTesting(n, m);
+        }
+
         public virtual double[] StartTesting(uint n, uint m)
         {
             //loop тестов

@@ -78,7 +78,6 @@ namespace AlgorithmLab1
             {
                 Position = AxisPosition.Left,
                 AbsoluteMinimum = 0,
-                Title = "Секунды"
             };
 
             plotModel.Axes.Add(dimensionAxis);
@@ -91,7 +90,11 @@ namespace AlgorithmLab1
         {
             plotModel.Series.Clear();
 
-            LineSeries lineSeries = new();
+            LineSeries lineSeries = new()
+            {
+                Title = "Экспериментальные значения",
+                Color = OxyColors.Green
+            };
 
             for (int i = 0; i < data.Length; i++)
             {
@@ -117,6 +120,7 @@ namespace AlgorithmLab1
 
             LineSeries lineSeries = new()
             {
+                Title = "Аппроксимация",
                 Color = OxyColors.Red
             };
 
@@ -141,7 +145,16 @@ namespace AlgorithmLab1
                 {
                     string selectedAlgorithmName = AlgSelector.SelectedItem.ToString();
                     Testing selectedAlgorithm = algorithms[selectedAlgorithmName];
-                    double[] result = selectedAlgorithm.StartTesting(n, m);
+                    double[] result = selectedAlgorithm.GetResults(n, m);
+
+                    if (selectedAlgorithm is NaivePow || selectedAlgorithm is RecPow || selectedAlgorithm is QuickPow || selectedAlgorithm is ClassicQuickPow)
+                    {
+                        plotModel.Axes[1].Title = "Шаги";
+                    }
+                    else
+                    {
+                        plotModel.Axes[1].Title = "Секунды";
+                    }
 
                     DrawGraph(result);
                     DrawApproximation(result);
