@@ -69,7 +69,7 @@ namespace AlgorithmLab1
             LinearAxis dimensionAxis = new()
             {
                 Position = AxisPosition.Bottom,
-                AbsoluteMaximum = 50000,
+                AbsoluteMaximum = 100000,
                 AbsoluteMinimum = 0,
                 Title = "Размерность"
             };
@@ -141,7 +141,7 @@ namespace AlgorithmLab1
             // Возможно тут можно сделать более продвинутую проверку, которая бы говорила что мы вводим не так, но мне лень. Может быть потом сделаю.
             if (AlgSelector.SelectedItem != null)
             {
-                if (uint.TryParse(InputBoxN.Text, out uint n) && uint.TryParse(InputBoxM.Text, out uint m) && n <= 50000)
+                if (uint.TryParse(InputBoxN.Text, out uint n) && uint.TryParse(InputBoxM.Text, out uint m) && n <= 100000)
                 {
                     string selectedAlgorithmName = AlgSelector.SelectedItem.ToString();
                     Testing selectedAlgorithm = algorithms[selectedAlgorithmName];
