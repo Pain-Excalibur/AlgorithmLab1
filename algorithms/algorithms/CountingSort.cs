@@ -53,5 +53,16 @@ namespace AlgoritmLab1.algorithms.algorithms
                 array[i] = outputArray[i];
             }
         }
+
+        static Random rand = new Random();
+
+        protected override object GetData(uint n)
+        {
+
+            uint[] vector = new uint[n];
+            for (uint i = 0; i < vector.Length; i++)
+                vector[i] = (uint)rand.Next(100);
+            return vector;
+        }
     }
 }
